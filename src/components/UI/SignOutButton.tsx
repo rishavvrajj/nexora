@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react'
-import { logOut } from '../../../lib/auth'
+import { signOut } from '../../../lib/auth-client'
 
 export default function SignOutButton() {
   
   const handleLogout = async () => {
-    await logOut()
+    await signOut()
   }
 
   return (
