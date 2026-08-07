@@ -1,68 +1,53 @@
-'use client'
+import Link from "next/link";
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
+export const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/" },
+  { label: "About", href: "/" },
+  { label: "Blog", href: "/" },
+  { label: "Contact", href: "/" },
+];
 
 export default function NavBar() {
-
-  const handleSignup = () => {
-    console.log('signup')
-    redirect('/auth');
-    // TODO: add real signup logic / route push
-  }
-
-  const navItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Features', href: '/features' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'About', href: '/about' },
-  ]
-
   return (
-    <nav className="flex items-center patrick-hand-regular justify-between px-4 lg:px-10 py-4">
-
+    <nav
+      aria-label="Main navigation"
+      className="patrick-hand-regular flex w-full items-center justify-between px-20 py-5 lg:px-10"
+    >
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
-        {/* <Image
-          src="/logo.png"
-          alt="Nexora logo"
-          width={32}
-          height={32}
-          className="h-6 w-6"
-        /> */}
-        <span className="text-3xl font-semibold text-zinc-200">nexora</span>
+      <Link
+        href="/"
+        aria-label="Nexora home"
+        className="group flex items-center"
+      >
+        <span className="text-3xl font-semibold tracking-wide text-white transition duration-300 group-hover:scale-105 group-hover:text-white/80">
+          nexora
+        </span>
       </Link>
 
-      {/* Nav links */}
-      <ul className="hidden md:flex items-center gap-12">
+      {/* External navigation links */}
+      <ul className="hidden items-center gap-8 md:flex lg:gap-12">
         {navItems.map((item) => (
-          <li key={item.href}>
-            <Link
-              href={'/'}
-              className="inline-block text-lg text-zinc-200 hover:text-black hover:-translate-y-1 transition-all duration-300"
+          <li key={item.label}>
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative inline-block text-lg text-white/80 transition duration-300 hover:-translate-y-1 hover:text-white"
             >
               {item.label}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>
 
       {/* CTA */}
-      <button
-        onClick={handleSignup}
-        className="
-          inline-block cursor-pointer rounded-md
-          text-xl font-medium text-white
-          transition-all duration-300
-          hover:-translate-y-1
-          hover:scale-[1.05]
-          hover:font-bold
-          hover:text-black
-        "
+      <Link
+        href="/auth"
+        className="rounded-full text-md border border-white/70 bg-white/10 px-5 py-1 font-medium text-white backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-white hover:text-gray-900 focus:outline-none focus:ring-4 focus:ring-white/40"
       >
-        Sign up
-      </button>
+        Get started
+      </Link>
     </nav>
-  )
+  );
 }
