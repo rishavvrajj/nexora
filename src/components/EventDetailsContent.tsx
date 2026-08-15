@@ -16,6 +16,14 @@ type Event = {
   notGoingCount: number
 }
 
+type Rsvps = {
+  id: string
+  name: string
+  email: string
+  status: string
+  respondedAt: string
+}
+
 import { Card, CardHeader, CardContent, CardTitle } from './UI/card'
 import { createInviteLinkAction } from '../../lib/events/events'
 import prisma from '../../lib/prisma'
@@ -25,33 +33,15 @@ export default async function EventDetailsContent({
   userId,
   eventId,
   event,
+  rsvps
 }: {
   userId: string
   eventId: string
   event: Event
+  rsvps: Rsvps[]
 }) {
   console.log('userId', userId)
   console.log('eventId', eventId)
-
-  const rsvpRows = await prisma.eventRsvp.findMany({
-    where: { eventId },
-    orderBy: { respondedAt: 'desc'},
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      status: true,
-      respondedAt: true
-    },
-  });
-
-  const rsvps = rsvpRows.map((r) => ({
-    id: r.id,
-    name: r.name,
-    email: r.email,
-    status: r.status,
-    respondedAt: r.respondedAt.toISOString()
-  }))
 
   const CreateInvite = createInviteLinkAction.bind(null, event.id)
   const inviteURL = event.inviteToken ? `${process.env.NEXT_PUBLIC_APP_URL ?? ""}invite/${event.inviteToken}` : ""

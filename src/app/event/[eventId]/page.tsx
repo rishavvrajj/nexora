@@ -2,8 +2,9 @@ import { auth } from "../../../../lib/auth";
 import { headers } from "next/headers";
 import EventDetailsContent from "@/components/EventDetailsContent";
 import { redirect, notFound } from "next/navigation";
-import prisma from "../../../../lib/prisma";
 import { countByStatus } from "@/app/dashboard/page";
+
+import prisma from "../../../../lib/prisma";
 
 export default async function EventDetailsPage({
   params,
@@ -21,6 +22,26 @@ export default async function EventDetailsPage({
   if (!session?.user) {
     redirect("/auth");
   }
+  
+  const rsvpRows = await prisma.eventRsvp.findMany({
+    where: { eventId },
+    orderBy: { respondedAt: 'desc'},
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      status: true,
+      respondedAt: true
+    },
+  });
+
+  const rsvps = rsvpRows.map((r) => ({
+    id: r.id,
+    name: r.name,
+    email: r.email,
+    status: r.status,
+    respondedAt: r.respondedAt.toISOString()
+  }))
 
   const row = await prisma.event.findFirst({
     where: {
@@ -68,6 +89,7 @@ export default async function EventDetailsPage({
       userId={session.user.id}
       eventId={row.id}
       event={event}
+      rsvps={rsvps}
     />
   );
 }
