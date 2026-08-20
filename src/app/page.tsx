@@ -3,7 +3,7 @@ import NavBar from "@/components/NavBar";
 
 const footerLinks = [
   { label: "Twitter", href: "https://x.com/rishavvrajj", external: true },
-  { label: "Portfolio", href: "https://rishavvraj.vercel.app/" },
+  { label: "Portfolio", href: "https://rishavvraj.vercel.app/", external: true},
   { label: "GitHub", href: "https://github.com/rishavvrajj", external: true },
 ];
 
@@ -33,7 +33,7 @@ export default function Home() {
 
         <section className="flex flex-1 items-center justify-center px-6 py-16 sm:px-10">
           <div className="mx-auto max-w-4xl text-center">
-            <span className="patrick-hand-regular mb-6 inline-block cursor-default rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm tracking-wider text-white/90 backdrop-blur-sm transition hover:border-white/50 hover:bg-white/20">
+            <span className="patrick-hand-regular cursor-pointer mb-6 inline-block rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm tracking-wider text-white/90 backdrop-blur-sm transition hover:border-white/50 hover:bg-white/20">
               Everything you need to host better events
             </span>
 
@@ -64,14 +64,14 @@ export default function Home() {
                 View GitHub
               </Link>
             </div>
-            
+
             <p className="mt-6 text-sm tracking-wide text-white/60">
               23,423+ events planned&nbsp;&nbsp;•&nbsp;&nbsp;98% customer satisfaction&nbsp;&nbsp;•&nbsp;&nbsp;4.9/5 average rating
             </p>
           </div>
         </section>
 
-        <footer className="flex flex-col items-center justify-between gap-4 px-6 py-6 text-sm text-white/70 sm:flex-row sm:px-10 lg:px-20">
+        <footer className="flex flex-col items-center justify-between gap-4 py-6 text-sm text-white/70 sm:flex-row sm:px-10 lg:px-20">
           <nav
             aria-label="Footer navigation"
             className="flex flex-wrap justify-center gap-x-6 gap-y-2"
@@ -90,8 +90,8 @@ export default function Home() {
           </nav>
 
           <p className="text-center sm:text-right">
-            Designed and built by{" "}
-            <Link href={'https://rishavvraj.vercel.app/'} target="_blank" className="text-white">Rishav Raj</Link>
+            designed and built by{" "}
+            <Link href={'https://rishavvraj.vercel.app/'} target="_blank" className="text-white underline">rishav raj.</Link>
           </p>
         </footer>
       </div>
